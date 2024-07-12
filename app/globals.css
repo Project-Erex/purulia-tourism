@@ -2,32 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  color-scheme: white;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* * * * * * * * *
+CONTENT SWITCH BUTTON
+* * * * * * * * */
+/* #switch {
+  height: 50px;
+  line-height: 50px;
+  position: relative;
+  overflow: hidden;
+  transition: 0.4s all ease;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+#switch span {
+  position: relative;
+  top: -17px;
+  transition: 0.4s all ease;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+#switch span:after {
+  content: attr(title);
+  display: block;
+  opacity: 0;
+  transition: 0.4s all ease;
 }
+
+#switch:hover span {
+  top: -67px;
+}
+
+#switch:hover span:after {
+  opacity: 1;
+} */

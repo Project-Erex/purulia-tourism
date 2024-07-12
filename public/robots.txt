@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://purulia-tourist-guide.in
+
+# Sitemaps
+Sitemap: https://purulia-tourist-guide.in/sitemap.xml
