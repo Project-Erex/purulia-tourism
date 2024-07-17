@@ -1,10 +1,34 @@
 "use client";
 import React, {useEffect, useState} from "react";
 import Image from "next/image";
+import {Badge} from "@/components/ui/badge";
 import supabase from "@/config/supabaseClient";
+import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
+import {TbTrain, TbPlaneInflight, TbRoad} from "react-icons/tb";
+import {} from "react-icons/tb";
+import {AspectRatio} from "@/components/ui/aspect-ratio";
 
-export default function Page({params}) {
-  console.log("dj");
+const images = [
+  {
+    src: "https://images.unsplash.com/photo-1464822759023c3b?auto=format&fit=crop&q=80&w=3540&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    alt: "Cabin 1",
+  },
+  {
+    src: "https://res.cloudinary.com/dzigf3fcv/image/upload/v172079/purulia-tourism/jvbus0srrdeb0jdrep8u.jpg",
+    alt: "Cabin 2",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?aurmat&fit=crop&q=80&w&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    alt: "Cabin 3",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=form&q=80&w=3540&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    alt: "Cabin 4",
+  },
+];
+
+const Page = ({params}) => {
+  const [mainImage, setMainImage] = useState(images[0]);
   const [isData, setIsData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -18,7 +42,7 @@ export default function Page({params}) {
           throw error;
         }
         setIsData(data || []);
-        console.log("first,da", data);
+        console.log("first,da", data[0]);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching images:", error.message);
@@ -40,143 +64,140 @@ export default function Page({params}) {
       </>
     );
   }
+  const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=-0.1354%2C51.5007%2C-0.1171%2C51.5069&layer=mapnik&marker=51.5033%2C-0.1268`;
   return (
-    <div className="w-full  mx-auto antialiased relative pt-16">
-      {isData.map((item, index) => (
-        <div key={`content-${index}`} className="mb-10">
-          <h2 className="bg-black text-white rounded-full text-sm w-fit px-4 py-1 mb-4">
-            {item.badge}
-          </h2>
+    <div className="min-h-screen pt-24 mb-10">
+      <div className=" max-w-7xl mx-auto  mx-autoshadow-md overflow-hidden">
+        <div className="">
+          <AspectRatio ratio={16 / 6} className="bg-muted mb-5">
+            <Image
+              src={isData[0].image}
+              alt={mainImage.alt}
+              width={700}
+              height={500}
+              className="object-cover w-full h-full p-3"
+              style={{
+                objectFit: "cover",
+                borderRadius: "30px", //👈 and here you can select border radius
+              }}
+            />
+          </AspectRatio>
 
-          <p className="text-xl mb-4">{item.name}</p>
+          <div className=" p-8">
+            <h2 className="text-3xl font-bold mb-4">{isData[0].name}</h2>
+            <p className="font-sans font-normal text-neutral-600  dark:text-neutral-300">
+              Bora,kungdi
+            </p>
+            <p className="text-green-600 font-semibold mb-4">$120.00/Night</p>
+            <div className="flex space-x-2 mt-2 p-2">
+              {images.map((image, index) => (
+                <button
+                  key={index}
+                  onClick={() => setMainImage(image)}
+                  className="focus:outline-none">
+                  <Image
+                    src={isData[0].image}
+                    alt={image.alt}
+                    width={100}
+                    height={100}
+                    className={`object-cover w-20 h-20 rounded-lg ${
+                      mainImage.src === image.src ? "ring-2 ring-green-500" : ""
+                    }`}
+                  />
+                </button>
+              ))}
+            </div>
+            <div className="mb-4">
+              <div className="space-x-2 space-y-2">
+                <Badge>nayan </Badge>
+                <Badge>nayan </Badge>
+                <Badge>nayan </Badge>
+                <Badge>nayan </Badge>
+                <Badge>nayan </Badge>
+                <Badge>nayan </Badge>
+                <Badge>nayan </Badge>
+                <Badge>nayan </Badge>
+                <Badge>nayan </Badge>
+                <Badge>nayan </Badge>
+                <Badge>nayan </Badge>
+                <Badge>nayan </Badge>
+              </div>
+            </div>
 
-          <div className="text-sm  prose prose-sm dark:prose-invert">
-            {item?.image && (
-              <Image
-                src={item.image}
-                alt="blog thumbnail"
-                height="1000"
-                width="1000"
-                className="rounded-lg mb-10 object-cover"
-              />
-            )}
-            {item.description}
+            <div className="mb-4 border p-4 border-gray-300 rounded-2xl pt-4">
+              <h3 className="text-xl font-semibold mb-2">Overview</h3>
+              <p className="font-sans font-normal text-neutral-600  dark:text-neutral-300">
+                {isData[0].description}
+              </p>
+            </div>
+            <div className="mb-4 border p-4 border-gray-300 rounded-2xl pt-4">
+              <div className="flex items-center justify-center">
+                <div className="mr-5">
+                  <TbRoad size={50} />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">By Road</h3>
+                  <p className="font-sans font-normal text-neutral-600  dark:text-neutral-300">
+                    The nearest Airport to Purulia is Netaji Subhas Chandra Bose
+                    International Airport, Kolkata which is about 250 km to Purulia. From
+                    there, you can take bus or train to Purulia.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="mb-4 border p-4 border-gray-300 rounded-2xl pt-4">
+              <div className="flex items-center justify-center">
+                <div className="mr-5">
+                  <TbTrain size={50} />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">By Train</h3>
+                  <p className="font-sans font-normal text-neutral-600  dark:text-neutral-300">
+                    The nearest Airport to Purulia is Netaji Subhas Chandra Bose
+                    International Airport, Kolkata which is about 250 km to Purulia. From
+                    there, you can take bus or train to Purulia.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mb-4 border p-4 border-gray-300 rounded-2xl pt-4">
+              <div className="flex items-center justify-center">
+                <div className="mr-5">
+                  <TbPlaneInflight size={50} />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">By Flight</h3>
+                  <p className="font-sans font-normal text-neutral-600  dark:text-neutral-300">
+                    The nearest Airport to Purulia is Netaji Subhas Chandra Bose
+                    International Airport, Kolkata which is about 250 km to Purulia. From
+                    there, you can take bus or train to Purulia.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      ))}
+
+        <div>
+          <h3 className="text-xl font-semibold ">Locations</h3>
+          <p className="font-sans font-normal text-neutral-600 dark:text-neutral-300">
+            105km from Amsterdam, Calculate with a travel time of 1:30 h
+          </p>
+          <div className="mt-2 bg-black w-full h-48 rounded-xl">
+            <iframe
+              title="OpenStreetMap"
+              width="600"
+              height="450"
+              className="w-full h-48 rounded-xl"
+              loading="lazy"
+              allowFullScreen
+              src={mapSrc}></iframe>
+          </div>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
-const dummyContent = [
-  {
-    title: "Lorem Ipsum Dolor Sit Amet",
-    description: (
-      <>
-        <p>
-          Sit duis est minim proident non nisi velit non consectetur. Esse adipisicing
-          laboris consectetur enim ipsum reprehenderit eu deserunt Lorem ut aliqua anim
-          do. Duis cupidatat qui irure cupidatat incididunt incididunt enim magna id est
-          qui sunt fugiat. Laboris do duis pariatur fugiat Lorem aute sit ullamco. Qui
-          deserunt non reprehenderit dolore nisi velit exercitation Lorem qui do enim
-          culpa. Aliqua eiusmod in occaecat reprehenderit laborum nostrud fugiat voluptate
-          do Lorem culpa officia sint labore. Tempor consectetur excepteur ut fugiat
-          veniam commodo et labore dolore commodo pariatur.
-        </p>
-        <p>
-          Dolor minim irure ut Lorem proident. Ipsum do pariatur est ad ad veniam in
-          commodo id reprehenderit adipisicing. Proident duis exercitation ad quis ex
-          cupidatat cupidatat occaecat adipisicing.
-        </p>
-        <p>
-          Tempor quis dolor veniam quis dolor. Sit reprehenderit eiusmod reprehenderit
-          deserunt amet laborum consequat adipisicing officia qui irure id sint
-          adipisicing. Adipisicing fugiat aliqua nulla nostrud. Amet culpa officia aliquip
-          deserunt veniam deserunt officia adipisicing aliquip proident officia sunt.
-        </p>
-      </>
-    ),
-    badge: "React",
-    image:
-      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=3540&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-];
-
-// import Image from "next/image";
-// import React from "react";
-
-// const Home = () => {
-//   return (
-//     <div className="min-h-screen bg-gray-100 pt-20">
-//       <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
-//         <div className="flex flex-col lg:flex-row">
-//           <div className="lg:w-1/2">
-//             <Image
-//               src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=3540&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-//               alt="Cabin"
-//               width={700}
-//               height={500}
-//               className="object-cover w-full h-full"
-//             />
-//           </div>
-//           <div className="lg:w-1/2 p-8">
-//             <h2 className="text-3xl font-bold mb-4">Monsoon Cottage</h2>
-//             <p className="text-gray-600 mb-2">Bora, Netherlands</p>
-//             <p className="text-green-600 font-semibold mb-4">$120.00/Night</p>
-
-//             <div className="mb-4">
-//               <div className="flex space-x-4">
-//                 <span className="bg-gray-200 px-2 py-1 rounded-full text-gray-700">
-//                   4 Adults
-//                 </span>
-//                 <span className="bg-gray-200 px-2 py-1 rounded-full text-gray-700">
-//                   Unsecured
-//                 </span>
-//                 <span className="bg-gray-200 px-2 py-1 rounded-full text-gray-700">
-//                   Lake Nearby
-//                 </span>
-//                 <span className="bg-gray-200 px-2 py-1 rounded-full text-gray-700">
-//                   Bonfire Area
-//                 </span>
-//                 <span className="bg-gray-200 px-2 py-1 rounded-full text-gray-700">
-//                   Dog Allowed
-//                 </span>
-//                 <span className="bg-gray-200 px-2 py-1 rounded-full text-gray-700">
-//                   Sauna
-//                 </span>
-//               </div>
-//             </div>
-
-//             <div className="mb-4">
-//               <h3 className="text-xl font-semibold mb-2">Overview</h3>
-//               <p className="text-gray-700">
-//                 Organizing a mountain cottage requires careful logistical planning and
-//                 support infrastructure. This may involve arranging transportation,
-//                 accommodation, medical facilities, communication systems, and supplies
-//                 such as food and water for the participants.
-//               </p>
-//             </div>
-
-//             <div>
-//               <h3 className="text-xl font-semibold mb-2">Locations</h3>
-//               <p className="text-gray-700">
-//                 105km from Amsterdam, Calculate with a travel time of 1:30 h
-//               </p>
-//               <div className="mt-2">
-//                 <Image
-//                   src="/images/map.jpg"
-//                   alt="Map"
-//                   width={400}
-//                   height={300}
-//                   className="object-cover w-full h-full"
-//                 />
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Home;
+export default Page;

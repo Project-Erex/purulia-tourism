@@ -14,14 +14,16 @@ export default function Header() {
   const closeMenu = () => setMobMenu(false);
   return (
     <>
-      <div className="z-[999] w-full flex flex-col items-center justify-center fixed ">
+      <header className="z-[999] w-full flex flex-col items-center justify-center fixed ">
         <Section
           className="overflow-visible border-b dark:border-subheading-light border-subheading-dark"
           type="paddingX">
           <div className="w-full h-auto flex items-center   justify-between">
             <div className="pt-2 pb-3">
               <Link onClick={closeMenu} href="/">
-                <ErexMainLogo className="w-24" />
+                <figure>
+                  <ErexMainLogo className="w-24" />
+                </figure>
               </Link>
             </div>
             <div className=" lg:flex hidden gap-14">
@@ -89,7 +91,7 @@ export default function Header() {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+      </header>
     </>
   );
 }

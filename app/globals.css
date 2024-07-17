@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 * {
   margin: 0;
   padding: 0;
@@ -9,35 +8,3 @@
   scroll-behavior: smooth;
   color-scheme: white;
 }
-
-/* * * * * * * * *
-CONTENT SWITCH BUTTON
-* * * * * * * * */
-/* #switch {
-  height: 50px;
-  line-height: 50px;
-  position: relative;
-  overflow: hidden;
-  transition: 0.4s all ease;
-}
-
-#switch span {
-  position: relative;
-  top: -17px;
-  transition: 0.4s all ease;
-}
-
-#switch span:after {
-  content: attr(title);
-  display: block;
-  opacity: 0;
-  transition: 0.4s all ease;
-}
-
-#switch:hover span {
-  top: -67px;
-}
-
-#switch:hover span:after {
-  opacity: 1;
-} */
