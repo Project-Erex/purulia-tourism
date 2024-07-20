@@ -11,7 +11,7 @@ function Footer() {
       <div className="flex flex-col items-start justify-between w-full lg:flex-row">
         <GridList className="grid-cols-1 md:gap-10 gap-5 xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-2">
           <div className="flex flex-col col-span-1 gap-6  ">
-            <ErexMainLogo className="w-32" />
+            {/* <ErexMainLogo className="w-32" /> */}
             <h1 className="text-heading dark:text-heading-dark text-[16px] gap-3 flex flex-col font-Unbounded font-normal">
               Purulia, West Bengal, India
               <NormalLink
@@ -32,7 +32,7 @@ function Footer() {
           </div>
           <div className="flex flex-col col-span-1 gap-4 ">
             <h1 className="text-business text-[24px] font-Satoshi font-medium pb-3">
-              SOLUTIONS
+              Website Policies
             </h1>
             <div>
               <NormalLink path="/services/business">Business</NormalLink>
@@ -46,7 +46,7 @@ function Footer() {
           </div>
           <div className="flex flex-col flex-wrap col-span-1 gap-4">
             <h1 className="text-business text-[24px] font-Satoshi font-medium pb-3">
-              ABOUT
+              Help
             </h1>
             <div>
               <NormalLink path="/about/about-us">About Us</NormalLink>
@@ -60,7 +60,7 @@ function Footer() {
           </div>
           <div className="flex flex-col flex-wrap  col-span-1 gap-4 md:col-span-1">
             <h1 className="text-business text-[24px] font-Satoshi font-medium pb-3">
-              QUICK LINK
+              Contact Us
             </h1>
             <div>
               <NormalLink path="/work/our-work">Work</NormalLink>
