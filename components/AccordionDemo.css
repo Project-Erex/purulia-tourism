@@ -1,0 +1,43 @@
+.accordion-item {
+  position: relative;
+  padding-left: 40px; /* Add space for the circle */
+  padding-right: 40px;
+}
+
+.accordion-item::before {
+  content: attr(data-number);
+  position: absolute;
+  left: 0;
+  top: 30px;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  border-width: 2px;
+  border-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.accordion-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 17px; /* Center the line with the circle */
+  top: 55%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: calc(100%); /* Extend line to the next circle */
+  background-color: black;
+  z-index: -1; /* Place the line behind the item content */
+}
+
+.accordion-content {
+  padding-left: 40px; /* Align content with the circle */
+}
+
+.AccordionTrigger[data-state="open"] > .AccordionChevron {
+  transform: rotate(180deg);
+}

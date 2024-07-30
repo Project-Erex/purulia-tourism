@@ -18,7 +18,7 @@ export function BentoGridDemo() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const itemsPerPage = 5;
+  const itemsPerPage = 8;
   const router = useRouter();
 
   //   .select("category_name,categories(category_name)");
