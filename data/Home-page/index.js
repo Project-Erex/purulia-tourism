@@ -19,12 +19,12 @@ export const ImageCarousel = [
 ];
 
 export const CategoryData = [
-  {icon: Roadmap, title: "Travel Intenary"},
-  {icon: Camper, title: "Vehicle"},
-  {icon: Bathrobe, title: "Hotels"},
-  {icon: Suitcase, title: "Package"},
-  {icon: Ticket, title: "Ticket"},
-  {icon: National, title: "Natural beauty"},
+  {icon: Roadmap, title: "Travel Intenary", id: "itinerary"},
+  {icon: Camper, title: "Vehicle", id: "comingsoon"},
+  {icon: Bathrobe, title: "Hotels", id: "comingsoon"},
+  {icon: Suitcase, title: "Package", id: "comingsoon"},
+  {icon: Ticket, title: "Ticket", id: "comingsoon"},
+  {icon: National, title: "Natural beauty", id: "comingsoon"},
 ];
 
 export const HowToReachData = [

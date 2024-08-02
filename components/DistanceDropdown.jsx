@@ -46,11 +46,10 @@ export default function DistanceDropdown({onSelectCategory}) {
   }
 
   return (
-    <div className="flex items-center ml-4">
-      {/* <div className="mr-5">Select Your Starting Location:{"  "}</div> */}
+    <div className="w-full">
       <Select onValueChange={onSelectCategory}>
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select a Location" />
+        <SelectTrigger>
+          <SelectValue placeholder="Select your starting point" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>

@@ -43,7 +43,7 @@ export default function PhotoGallery() {
         <SectionHeading type="large">Media gallary</SectionHeading>
         <div className="max-w-3xl text-center">
           <Heading className="xl:leading-tight" type="large">
-            Explore the Beautiful Places Around the World
+            Immerse yourself in Purulia's beauty.
           </Heading>
         </div>
       </div>

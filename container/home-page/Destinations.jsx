@@ -11,7 +11,7 @@ export default function Destinations() {
         <SectionHeading type="large">Top Destinations</SectionHeading>
         <div className="max-w-3xl text-center">
           <Heading className="xl:leading-tight" type="large">
-            Explore the Beautiful Places Around the World
+            Discover Purulia's hidden gems.
           </Heading>
         </div>
       </div>

@@ -45,9 +45,8 @@ export function DropdownMenu({onSelectCategory}) {
 
   return (
     <div className="flex items-center justify-between">
-      <div className="mr-5">Filter:{"  "}</div>
       <Select onValueChange={onSelectCategory}>
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className="md:w-[180px]">
           <SelectValue placeholder="Select a category" />
         </SelectTrigger>
         <SelectContent>

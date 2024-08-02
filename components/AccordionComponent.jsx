@@ -24,8 +24,6 @@ export default function AccordionDemo({
   const handleItemClick = (id) => {
     router.push(`/destination/${id}`);
   };
-  console.log("djbfdfbdjf", perDayTravelTime / 60);
-  logHelper("djbfdfbdjf", parseInt(exactDays));
 
   const totalAllowedTimePerDay = 8 * 60; // 8 hours in minutes
 
@@ -58,6 +56,8 @@ export default function AccordionDemo({
       defaultOpenItems.push(`place-${dayIndex}-${placeIndex}`);
     });
   });
+
+  logHelper("dfbkjsdbf", days.length);
   const getGridColsClass = () => {
     const dayCount = days.length;
     if (dayCount === 1) return "grid-cols-2";

@@ -7,6 +7,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
+  PaginationEllipsis,
 } from "@/components/ui/pagination";
 
 export function PaginationComponent({currentPage, totalPages, onPageChange}) {
@@ -28,14 +29,62 @@ export function PaginationComponent({currentPage, totalPages, onPageChange}) {
 
   const renderPageNumbers = () => {
     const pages = [];
-    for (let i = 1; i <= totalPages; i++) {
+    if (totalPages <= 3) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(
+          <PaginationItem key={i}>
+            <PaginationLink
+              href="#"
+              isActive={i === currentPage}
+              onClick={() => handlePageClick(i)}>
+              {i}
+            </PaginationLink>
+          </PaginationItem>,
+        );
+      }
+    } else {
       pages.push(
-        <PaginationItem key={i}>
+        <PaginationItem key={1}>
           <PaginationLink
             href="#"
-            isActive={i === currentPage}
-            onClick={() => handlePageClick(i)}>
-            {i}
+            isActive={1 === currentPage}
+            onClick={() => handlePageClick(1)}>
+            1
+          </PaginationLink>
+        </PaginationItem>,
+      );
+
+      if (currentPage > 3) {
+        pages.push(<PaginationEllipsis key="start-ellipsis" />);
+      }
+
+      const startPage = Math.max(2, currentPage - 1);
+      const endPage = Math.min(totalPages - 1, currentPage + 1);
+
+      for (let i = startPage; i <= endPage; i++) {
+        pages.push(
+          <PaginationItem key={i}>
+            <PaginationLink
+              href="#"
+              isActive={i === currentPage}
+              onClick={() => handlePageClick(i)}>
+              {i}
+            </PaginationLink>
+          </PaginationItem>,
+        );
+      }
+
+      if (currentPage < totalPages - 2) {
+        pages.push(<PaginationEllipsis key="end-ellipsis" />);
+      }
+
+      pages.push(
+        <PaginationItem key={totalPages}>
+          <PaginationLink
+            href="#"
+            isActive={totalPages === currentPage}
+            onClick={() => handlePageClick(totalPages)}>
+            {totalPages}
           </PaginationLink>
         </PaginationItem>,
       );

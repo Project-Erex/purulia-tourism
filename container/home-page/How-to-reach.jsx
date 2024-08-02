@@ -11,7 +11,7 @@ export default function HowToReach() {
         <SectionHeading type="large">How to reach Purulia</SectionHeading>
         <div className="max-w-3xl text-center">
           <Heading className="xl:leading-tight" type="large">
-            Explore the Beautiful Places Around the World
+            Easy access to Purulia's wonders.
           </Heading>
         </div>
       </div>

@@ -10,11 +10,28 @@ import {SubHeading} from "@/components/ui/text-components/SubHeading";
 import axios from "axios";
 import {useEffect, useState} from "react";
 import {Cloud, CloudRain, Sun} from "lucide-react";
+import {useJsApiLoader} from "@react-google-maps/api";
 
 export default function Hero() {
   const [location, setLocation] = useState({lat: null, lon: null});
   const [weather, setWeather] = useState(null);
   const [error, setError] = useState(null);
+  const [distance, setDistance] = useState(null);
+  const [insideBounds, setInsideBounds] = useState(null);
+  const {isLoaded} = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: "AIzaSyDbxdM_pA81YqlheJSleL2wG2-5-64j9NQ",
+  });
+  const bounds = isLoaded
+    ? new google.maps.LatLngBounds(
+        new google.maps.LatLng(23.303260158226784, 86.34011865871555), // Southwest corner
+        new google.maps.LatLng(23.363111960475987, 86.38636555029298), // Northeast corner
+      )
+    : null;
+  const boundsCenter = {
+    lat: (23.303260158226784 + 23.363111960475987) / 2,
+    lon: (86.34011865871555 + 86.38636555029298) / 2,
+  };
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -33,22 +50,67 @@ export default function Hero() {
       setError("Geolocation is not supported by this browser.");
     }
   }, []);
-
+  const daa = {
+    lat: 23.32020418657367,
+    lon: 86.3762907681383,
+  };
   useEffect(() => {
-    if (location.lat && location.lon) {
-      const apiKey = "0f669bbcfd95a7d79134fe530ccd5e60";
-      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${"23.517078604524716"}&lon=${"86.14439673370283"}&units=metric&APPID=${apiKey}`;
+    if (location.lat && location.lon && isLoaded) {
+      const userLatLng = new google.maps.LatLng(location.lat, location.lon);
 
-      axios
-        .get(url)
-        .then((response) => {
-          setWeather(response.data);
-        })
-        .catch((error) => {
-          setError("Error fetching weather data.");
-        });
+      if (bounds.contains(userLatLng)) {
+        setInsideBounds(true);
+        fetchWeather(location.lat, location.lon);
+      } else {
+        setInsideBounds(false);
+        fetchWeather(boundsCenter.lat, boundsCenter.lon);
+        const distance = calculateDistance(
+          location.lat,
+          location.lon,
+          boundsCenter.lat,
+          boundsCenter.lon,
+        );
+        setDistance(distance);
+      }
     }
-  }, [location]);
+  }, [location, isLoaded]);
+
+  const fetchWeather = (lat, lon) => {
+    const apiKey = "0f669bbcfd95a7d79134fe530ccd5e60";
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&APPID=${apiKey}`;
+
+    axios
+      .get(url)
+      .then((response) => {
+        setWeather(response.data);
+      })
+      .catch((error) => {
+        setError("Error fetching weather data.");
+      });
+  };
+
+  const calculateDistance = (lat1, lon1, lat2, lon2) => {
+    const R = 6371; // Radius of the Earth in kilometers
+    const dLat = ((lat2 - lat1) * Math.PI) / 180;
+    const dLon = ((lon2 - lon1) * Math.PI) / 180;
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((lat1 * Math.PI) / 180) *
+        Math.cos((lat2 * Math.PI) / 180) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+    return distance.toFixed(2);
+  };
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!weather) {
+    return <div>Loading...</div>;
+  }
   const getWeatherIcon = (description) => {
     if (description.includes("haze")) {
       return <Cloud className="w-16 h-16 text-white mr-2" />;
@@ -60,30 +122,34 @@ export default function Hero() {
       return null; // Fallback icon or null if no match
     }
   };
-
+  const weatherr = (weather?.main.temp).toFixed(1);
   return (
-    <div className="w-full h-full  flex items-center  justify-center bg-background dark:bg-background-dark  ">
+    <div className="w-full h-full  flex items-center  justify-center bg-background dark:bg-background-dark  pt-16">
       <div className="max-w-screen-2xl w-full relative">
         <ImageSlider />
-        <div className=" absolute top-16 left-56">
-          <div className="font-DMSans font-bold text-3xl tracking-tighter text-white">
-            {weather?.name}
-          </div>
-          <div className="flex justify-center items-center">
-            <div className="flex items-center text-white">
-              {weather && getWeatherIcon(weather.weather[0].description)}
-            </div>
-            <div
-              className="font-DMSans font-bold text-6xl tracking-tighter text-white"
-              type="large">
-              {weather?.main.temp}°C
-            </div>
-          </div>
-        </div>
         <div
           className={`absolute w-full h-full bg-black/25 flex justify-center  items-center top-0 pt-10 ${styles.xPadding} `}>
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-10 ">
             <div className=" w-full h-full flex-col  justify-center flex  gap-5 ">
+              <div>
+                <div>
+                  <div className="font-DMSans font-bold lg:text-xl sm:text-xl text-lg tracking-tighter text-heading-dark dark:text-heading-dark">
+                    {weather?.name}
+                  </div>
+                </div>
+                <div className="font-DMSans font-bold text-4xl tracking-tighter text-heading-dark dark:text-heading-dark">
+                  {weatherr}°C
+                </div>
+                {insideBounds ? (
+                  <p className="font-DMSans font-bold lg:text-2xl sm:text-xl text-lg tracking-tighter text-heading-dark dark:text-heading-dark">
+                    Welcome! To Purulia.
+                  </p>
+                ) : (
+                  <p className="font-DMSans font-bold lg:text-2xl sm:text-xl text-lg tracking-tighter text-heading-dark dark:text-heading-dark">
+                    Distance from Purulia: {distance} km
+                  </p>
+                )}
+              </div>
               <SectionHeading
                 className="text-heading-dark dark:text-heading-dark"
                 type="large">
@@ -98,7 +164,7 @@ export default function Hero() {
                 Planning for a trip? We will organize your trip with the best places and
                 within best budget!
               </SubHeading>
-              <Button type="link" href="/blogs" title="View Packages" />
+              <Button type="link" href="/comingsoon" title="View Packages" />
             </div>
             <div className="w-full h-full flex justify-center items-center">
               <Category />

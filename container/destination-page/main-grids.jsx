@@ -94,10 +94,9 @@ export function BentoGridDemo() {
   }
   console.log("isdata", isData[0].category_name);
   return (
-    <div>
-      <div className="flex items-center justify-between pb-7">
-        {/* <BreadcrumbComponent /> */}
-        <div className="text-3xl font-DMSans font-bold">Tourist Places</div>
+    <div className="mx-4">
+      <div className="md:flex items-center justify-between pb-7 max-w-7xl mx-auto ">
+        <div className="text-3xl font-DMSans font-bold pb-5">Tourist Places</div>
         <DropdownMenu onSelectCategory={handleCategoryChange} />
       </div>
       <BentoGrid className="max-w-7xl mx-auto pb-6">
@@ -107,20 +106,20 @@ export function BentoGridDemo() {
             item.category_name === 1
               ? "Forest"
               : item.category_name === 2
-                ? "Dam"
-                : item.category_name === 3
-                  ? "Waterfall"
-                  : item.category_name === 4
-                    ? "Hill"
-                    : item.category_name === 5
-                      ? "Historical Site"
-                      : item.category_name === 6
-                        ? "Village"
-                        : item.category_name === 7
-                          ? "Sacred site"
-                          : item.category_name === 8
-                            ? "Scenic Spot"
-                            : "All";
+              ? "Dam"
+              : item.category_name === 3
+              ? "Waterfall"
+              : item.category_name === 4
+              ? "Hill"
+              : item.category_name === 5
+              ? "Historical Site"
+              : item.category_name === 6
+              ? "Village"
+              : item.category_name === 7
+              ? "Sacred site"
+              : item.category_name === 8
+              ? "Scenic Spot"
+              : "All";
           return (
             <BentoGridItem
               key={i}
@@ -128,14 +127,14 @@ export function BentoGridDemo() {
               description={item.description}
               onClick={() => handleItemClick(item.id)}
               header={
-                <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100">
+                <div className="w-full h-full  rounded-xl bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100">
                   <Image
                     src={item.image}
                     width={0}
                     alt="d"
                     height={0}
                     sizes="100vw"
-                    style={{width: "100%", height: "auto", borderRadius: "10px"}}
+                    style={{width: "100%", height: "200px", borderRadius: "10px"}}
                   />
                 </div>
               }

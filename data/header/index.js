@@ -1,18 +1,18 @@
 export const NavLink = [
   {
-    id: "tours",
-    title: "Tours",
+    id: "/itinerary",
+    title: "Itinerary",
   },
   {
-    id: "about/about-us",
+    id: "/about",
     title: "About",
   },
   {
-    id: "destination",
+    id: "/destination",
     title: "Destination",
   },
-  {
-    id: "contact",
-    title: "Contact",
-  },
+  // {
+  //   id: "contact",
+  //   title: "Contact",
+  // },
 ];

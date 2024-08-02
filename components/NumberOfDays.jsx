@@ -18,11 +18,11 @@ export default function DistanceDropdown({onSelectDays}) {
   ];
 
   return (
-    <div className="flex items-center ml-4">
+    <div className="w-full">
       {/* <div className="mr-5">Select Travel Days:{"  "}</div> */}
       <Select onValueChange={onSelectDays}>
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select a number" />
+        <SelectTrigger>
+          <SelectValue placeholder="Select your Travel days" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>

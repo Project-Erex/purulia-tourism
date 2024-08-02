@@ -9,12 +9,10 @@ import Weather from "@/components/WeatherComponent";
 export default function App() {
   return (
     <>
-      <Weather />;
       <Hero />
       <Destinations />
       <HowToReach />
       <PhotoGallery />
-      <BentoGrid />
     </>
   );
 }

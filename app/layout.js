@@ -4,6 +4,7 @@ import "./globals.css";
 import {Providers} from "./providers";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
+import Script from "next/script";
 
 const DancingScript = Dancing_Script({
   weight: ["400", "500", "600", "700"],
