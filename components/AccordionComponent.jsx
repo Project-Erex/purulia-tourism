@@ -56,7 +56,7 @@ export default function AccordionDemo({
       defaultOpenItems.push(`place-${dayIndex}-${placeIndex}`);
     });
   });
-  console.log("jbfddkjsbffb", days.length);
+
   const getGridColsClass = () => {
     const dayCount = days.length;
     if (dayCount === 1) return "grid-cols-2";

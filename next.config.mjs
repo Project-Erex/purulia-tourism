@@ -15,6 +15,9 @@ const nextConfig = {
     ],
     domains: ["res.cloudinary.com"],
   },
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+  },
 };
 
 export default nextConfig;

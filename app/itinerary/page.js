@@ -7,7 +7,7 @@ import NumberOfDays from "@/components/NumberOfDays";
 import Link from "next/link";
 
 export default function Itinerary() {
-  const [numberOfDays, setNumberOfDays] = useState(1);
+  const [numberOfDays, setNumberOfDays] = useState(null);
   const [selectedDistance, setSelectedDistance] = useState(null);
 
   const handleSelectDistance = (categoryId) => {
@@ -19,6 +19,11 @@ export default function Itinerary() {
     // console.log("Selected number of days:", categoryId);
     setNumberOfDays(categoryId);
   };
+  const isButtonDisabled = selectedDistance === null && numberOfDays === null;
+  const linkPath = `/itinerary/create?exactDays=${numberOfDays}&numberOfDays=${
+    numberOfDays === 1 ? 8 : numberOfDays === 2 ? 16 : numberOfDays === 3 ? 24 : null
+  }&selectedDistance=${selectedDistance}`;
+
   return (
     <div className="overflow-hidden  pt-40">
       <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -38,27 +43,15 @@ export default function Itinerary() {
                 <NumberOfDays onSelectDays={handleSelectDays} />
               </div>
               <div className="whitespace-nowrap pt-2 sm:pt-0 grid sm:block">
-                <Link
-                  href={{
-                    pathname: "/itinerary/create",
-                    query: {
-                      exactDays: numberOfDays,
-                      numberOfDays:
-                        numberOfDays === 1
-                          ? 8
-                          : numberOfDays === 2
-                          ? 16
-                          : numberOfDays === 3
-                          ? 24
-                          : null,
-                      selectedDistance: selectedDistance,
-                    },
-                  }}>
-                  <Button className="float-right ml-4 lg:block hidden">Next</Button>
-                  <Button className="float-right ml-4 lg:hidden block w-full">
+                {!isButtonDisabled ? (
+                  <Link href={linkPath}>
+                    <Button className="float-right ml-4">Next</Button>
+                  </Link>
+                ) : (
+                  <Button className="float-right ml-4" disabled>
                     Next
                   </Button>
-                </Link>
+                )}
               </div>
             </div>
           </div>
