@@ -67,7 +67,7 @@ export default function AccordionDemo({
 
   return (
     <Tabs defaultValue="day-0" className="w-full">
-      <TabsList className={`grid w-full ${getGridColsClass()}`}>
+      <TabsList className={`grid w-full ${getGridColsClass()} absolute top-0 z-30`}>
         {days.map((_, dayIndex) => (
           <TabsTrigger key={dayIndex} value={`day-${dayIndex}`} className="tab-trigger">
             Day {dayIndex + 1}
@@ -78,7 +78,10 @@ export default function AccordionDemo({
         </TabsTrigger>
       </TabsList>
       {days.map((day, dayIndex) => (
-        <TabsContent key={dayIndex} value={`day-${dayIndex}`} className="tab-content">
+        <TabsContent
+          key={dayIndex}
+          value={`day-${dayIndex}`}
+          className="tab-content pt-14">
           <div className="font-DMSans font-bold text-3xl tracking-tighter">
             Day {dayIndex + 1}
           </div>

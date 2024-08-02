@@ -104,25 +104,7 @@ export default function Hero() {
     return distance.toFixed(2);
   };
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
-  if (!weather) {
-    return <div>Loading...</div>;
-  }
-  const getWeatherIcon = (description) => {
-    if (description.includes("haze")) {
-      return <Cloud className="w-16 h-16 text-white mr-2" />;
-    } else if (description.includes("rain")) {
-      return <CloudRain className="w-16 h-16 text-white mr-2" />;
-    } else if (description.includes("clear")) {
-      return <Sun className="w-16 h-16 text-white mr-2" />;
-    } else {
-      return null; // Fallback icon or null if no match
-    }
-  };
-  const weatherr = (weather?.main.temp).toFixed(1);
+  const weatherr = weather?.main?.temp?.toFixed(1);
   return (
     <div className="w-full h-full  flex items-center  justify-center bg-background dark:bg-background-dark  pt-16">
       <div className="max-w-screen-2xl w-full relative">

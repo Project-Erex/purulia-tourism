@@ -145,7 +145,7 @@ export default function Create({}) {
         )}
         {result && (
           <div className="flex w-full pt-8">
-            <div className="w-1/2 pr-2">
+            <div className="md:w-1/2 pr-2">
               <ScrollArea className="h-screen ">
                 <AccordionDemo
                   startLocation={startLocation}
@@ -157,7 +157,7 @@ export default function Create({}) {
                 />
               </ScrollArea>
             </div>
-            <div className="w-1/2 pl-2">
+            <div className="md:block hidden w-1/2 pl-2">
               <MapComponent
                 result={result}
                 startLocation={startLocation}

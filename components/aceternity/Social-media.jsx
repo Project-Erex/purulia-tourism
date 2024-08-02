@@ -72,17 +72,11 @@ export default function SocialMediaDemo() {
   return (
     <>
       <Dock>
-        <DockIcon link={"https://x.com/erexstudio"}>
-          <Icons.gitHub className="w-6 h-6" />
-        </DockIcon>
         <DockIcon link={"https://www.facebook.com/erexstudio/"}>
           <Icons.googleDrive className="w-6 h-6" />
         </DockIcon>
         <DockIcon link={"https://www.instagram.com/erexstudio/"}>
           <Icons.notion className="w-6 h-6" />
-        </DockIcon>
-        <DockIcon link={"https://www.linkedin.com/company/erexstudio/"}>
-          <Icons.linkedIn className="w-6 h-6" />
         </DockIcon>
       </Dock>
     </>
