@@ -77,7 +77,7 @@ export function BentoGridDemo() {
   };
 
   const handleCategoryChange = (categoryId) => {
-    console.log("catego", categoryId);
+    // console.log("catego", categoryId);
     setSelectedCategory(categoryId);
     setCurrentPage(1); // Reset to the first page on category change
     setIsLoading(true); // Set loading state while fetching new data
@@ -92,7 +92,7 @@ export function BentoGridDemo() {
   if (!isData || isData.length === 0) {
     return <div>No images found</div>;
   }
-  console.log("isdata", isData[0].category_name);
+  // console.log("isdata", isData[0].category_name);
   return (
     <div className="mx-4">
       <div className="md:flex items-center justify-between pb-7 max-w-7xl mx-auto ">
@@ -101,7 +101,7 @@ export function BentoGridDemo() {
       </div>
       <BentoGrid className="max-w-7xl mx-auto pb-6">
         {isData.map((item, i) => {
-          console.log("ddddd", item.category_name);
+          // console.log("ddddd", item.category_name);
           const selectedd =
             item.category_name === 1
               ? "Forest"

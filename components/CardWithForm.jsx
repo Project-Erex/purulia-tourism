@@ -97,10 +97,10 @@ export function CardWithForm({setdata}) {
       selectedStartingPoint === "purulia"
         ? "distance_from_purulia"
         : selectedStartingPoint === "adra"
-          ? "distance_from_adra"
-          : selectedStartingPoint === "barabhum"
-            ? "distance_from_barabhum"
-            : null;
+        ? "distance_from_adra"
+        : selectedStartingPoint === "barabhum"
+        ? "distance_from_barabhum"
+        : null;
 
     if (!showDistanceFrom) {
       console.error("Invalid starting point");
@@ -136,7 +136,7 @@ export function CardWithForm({setdata}) {
       }
 
       // Log the nearby destinations
-      console.log("Nearby destinations within 60km range:", nearbyDestinations);
+      // console.log("Nearby destinations within 60km range:", nearbyDestinations);
       setNearbyDestinations(nearbyDestinations);
       setdata(nearbyDestinations);
     } catch (error) {

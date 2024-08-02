@@ -123,6 +123,7 @@ export default function Create({}) {
     setResult(result);
     return result;
   };
+  const [hoveredPlace, setHoveredPlace] = useState(null);
 
   const handleMouseEnter = (event, place) => {
     // Add your custom logic here
@@ -133,7 +134,6 @@ export default function Create({}) {
     setHoveredPlace(null);
     // Add your custom logic here
   };
-  const [hoveredPlace, setHoveredPlace] = useState(null);
 
   return (
     <div className="pt-24 w-full">

@@ -11,12 +11,12 @@ export default function Itinerary() {
   const [selectedDistance, setSelectedDistance] = useState(null);
 
   const handleSelectDistance = (categoryId) => {
-    console.log("Selected distance category:", categoryId);
+    // console.log("Selected distance category:", categoryId);
     setSelectedDistance(categoryId);
   };
 
   const handleSelectDays = (categoryId) => {
-    console.log("Selected number of days:", categoryId);
+    // console.log("Selected number of days:", categoryId);
     setNumberOfDays(categoryId);
   };
   return (

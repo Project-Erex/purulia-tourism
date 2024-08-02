@@ -60,7 +60,7 @@ const Page = ({params}) => {
       </>
     );
   }
-  logHelper("fhsdfhosdihfids", isData);
+  // logHelper("fhsdfhosdihfids", isData);
   const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=-0.1354%2C51.5007%2C-0.1171%2C51.5069&layer=mapnik&marker=51.5033%2C-0.1268`;
   const dataa = [
     "https://via.placeholder.com/700x500.png?text=Image+1",

@@ -20,7 +20,7 @@ export default function Contact() {
 
       if (error) throw error;
 
-      console.log("Data inserted successfully:", data);
+      //   console.log("Data inserted successfully:", data);
       // Optionally, handle successful submission, e.g., show a success message, clear the form, etc.
     } catch (error) {
       console.error("Error inserting data:", error.message);

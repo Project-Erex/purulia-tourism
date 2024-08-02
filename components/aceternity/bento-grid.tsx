@@ -52,7 +52,9 @@ export const BentoGridItem = ({
         <div className="group-hover/bento:translate-x-2 transition duration-200">
           {title}
         </div>
-        <Badge className="line-clamp-1">{icon}</Badge>
+        <Badge variant="default" className="line-clamp-1">
+          {icon}
+        </Badge>
       </div>
       <div className="font-sans font-normal text-neutral-600 text-xs dark:text-neutral-300">
         {truncateString(description, 50)}

@@ -113,8 +113,8 @@ export default function page() {
                 Simple and affordable
               </h3>
               <p className="mt-1 text-gray-600 dark:text-neutral-400 font-DMSans">
-                From boarding passes to movie tickets, there's pretty much nothing you
-                can't store with Preline.
+                {`From boarding passes to movie tickets, there's pretty much nothing you
+                can't store with Preline.`}
               </p>
             </div>
           </div>

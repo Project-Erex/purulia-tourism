@@ -158,7 +158,7 @@ export default function Hero() {
               <Heading
                 className="text-heading-dark leading-relaxed  dark:text-heading-dark"
                 type="large">
-                Discover Purulia's natural beauty and culture!
+                {`  Discover Purulia's natural beauty and culture!`}
               </Heading>
               <SubHeading type="extraLarge">
                 Planning for a trip? We will organize your trip with the best places and
