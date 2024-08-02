@@ -19,8 +19,8 @@ export default function Destination() {
           statusMessage="online"
           phoneNumber={+919064504565}
           allowClickAway={true}
-          accountName={"Purulia Tourism"}
-          avatar="/bannerImage.jpg"
+          accountName={"Purulia Tour"}
+          avatar="/iconn.png"
         />
       </div>
     </div>

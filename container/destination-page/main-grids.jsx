@@ -86,7 +86,7 @@ export function BentoGridDemo() {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="max-w-7xl mx-auto">Loading...</div>;
   }
 
   if (!isData || isData.length === 0) {

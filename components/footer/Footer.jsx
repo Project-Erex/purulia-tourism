@@ -36,10 +36,12 @@ function Footer() {
               Help
             </h1>
             <div>
-              <NormalLink path="/about/about-us">About Us</NormalLink>
+              <NormalLink path="https://erexstudio.com/about/about-us">
+                About Us
+              </NormalLink>
             </div>
             <div>
-              <NormalLink path="/add-your-business">Add a Destination</NormalLink>
+              <NormalLink path="/comingsoon">Add a Destination</NormalLink>
             </div>
           </div>
         </GridList>
