@@ -56,10 +56,7 @@ export default function Hero() {
       setError("Geolocation is not supported by this browser.");
     }
   }, []);
-  const daa = {
-    lat: 23.32020418657367,
-    lon: 86.3762907681383,
-  };
+
   useEffect(() => {
     if (location.lat && location.lon && isLoaded) {
       const userLatLng = new google.maps.LatLng(location.lat, location.lon);
