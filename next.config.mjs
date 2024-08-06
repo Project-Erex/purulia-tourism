@@ -18,6 +18,14 @@ const nextConfig = {
   experimental: {
     missingSuspenseWithCSRBailout: false,
   },
+  async rewrites() {
+    return [
+      {
+        source: "/api/distance",
+        destination: "https://maps.googleapis.com/maps/api/distancematrix/json", // Proxy to Google Maps API
+      },
+    ];
+  },
 };
 
 export default nextConfig;

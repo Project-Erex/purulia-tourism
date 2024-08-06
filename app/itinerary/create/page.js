@@ -33,6 +33,8 @@ export default function Create({}) {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const puruliaCoords = [23.342257, 86.362839];
+
   useEffect(() => {
     const fetchDestinations = async () => {
       try {
@@ -73,6 +75,47 @@ export default function Create({}) {
         : starting_location === "barabhum"
         ? "time_taken_from_barabhum"
         : null;
+
+    console.log("object", fetchedData);
+
+    // const coords = fetchedData?.map((item) => [item?.latitude, item?.longitude]);
+    // console.log("data", coords);
+
+    // function haversineDistance(coord1, coord2) {
+    //   const R = 6371.0; // Radius of the Earth in km
+    //   const lat1 = coord1[0];
+    //   const lon1 = coord1[1];
+    //   const lat2 = coord2[0];
+    //   const lon2 = coord2[1];
+
+    //   const dLat = (lat2 - lat1) * (Math.PI / 180);
+    //   const dLon = (lon2 - lon1) * (Math.PI / 180);
+
+    //   const a =
+    //     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    //     Math.cos(lat1 * (Math.PI / 180)) *
+    //       Math.cos(lat2 * (Math.PI / 180)) *
+    //       Math.sin(dLon / 2) *
+    //       Math.sin(dLon / 2);
+
+    //   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    //   const distance = R * c;
+
+    //   return distance;
+    // }
+
+    // function filterNearby(masterCoord, data, maxDistance) {
+    //   return data.filter((coord) => {
+    //     const distance = haversineDistance(masterCoord, coord);
+    //     return distance <= maxDistance;
+    //   });
+    // }
+
+    // const maxDistance = 20; // kilometers
+
+    // const nearbyCoords = filterNearby(puruliaCoords, coords, maxDistance);
+
+    // console.log("dasd", nearbyCoords);
 
     const filteredDestinations = fetchedData.reduce(
       (acc, destination) => {

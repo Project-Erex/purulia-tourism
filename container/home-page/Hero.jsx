@@ -17,6 +17,7 @@ export default function Hero() {
   const [weather, setWeather] = useState(null);
   const [error, setError] = useState(null);
   const [distance, setDistance] = useState(null);
+  const [locationData, setLocationData] = useState({});
   const [insideBounds, setInsideBounds] = useState(null);
   const {isLoaded} = useJsApiLoader({
     id: "google-map-script",
@@ -31,6 +32,11 @@ export default function Hero() {
   const boundsCenter = {
     lat: (23.303260158226784 + 23.363111960475987) / 2,
     lon: (86.34011865871555 + 86.38636555029298) / 2,
+  };
+
+  const puruliaCoords = {
+    lat: 23.342257,
+    lng: 86.362839,
   };
 
   useEffect(() => {
@@ -50,10 +56,7 @@ export default function Hero() {
       setError("Geolocation is not supported by this browser.");
     }
   }, []);
-  const daa = {
-    lat: 23.32020418657367,
-    lon: 86.3762907681383,
-  };
+
   useEffect(() => {
     if (location.lat && location.lon && isLoaded) {
       const userLatLng = new google.maps.LatLng(location.lat, location.lon);
@@ -61,8 +64,10 @@ export default function Hero() {
       if (bounds.contains(userLatLng)) {
         setInsideBounds(true);
         fetchWeather(location.lat, location.lon);
+        // fetchDistance(location.lat, location.lon)
       } else {
         setInsideBounds(false);
+        fetchDistance(location.lat, location.lon);
         fetchWeather(boundsCenter.lat, boundsCenter.lon);
         const distance = calculateDistance(
           location.lat,
@@ -89,6 +94,21 @@ export default function Hero() {
       });
   };
 
+  const fetchDistance = async (lat, lon) => {
+    const apiKey = "AIzaSyDbxdM_pA81YqlheJSleL2wG2-5-64j9NQ";
+    try {
+      const response = await fetch(
+        `/api/distance?units=metric&origins=${lat},${lon}&destinations=${puruliaCoords.lat},${puruliaCoords.lng}&key=${apiKey}`,
+      );
+      const data = await response.json();
+      console.log(data);
+      // serLocationData(data);
+      setLocationData(data);
+    } catch (error) {
+      console.error("Error fetching distance:", error);
+    }
+  };
+
   const calculateDistance = (lat1, lon1, lat2, lon2) => {
     const R = 6371; // Radius of the Earth in kilometers
     const dLat = ((lat2 - lat1) * Math.PI) / 180;
@@ -105,6 +125,11 @@ export default function Hero() {
   };
 
   const weatherr = weather?.main?.temp?.toFixed(1);
+  const km = 40000;
+  const isInsidePurulia = locationData?.rows?.[0]?.elements?.[0]?.distance?.value < km;
+  const youAreIn = locationData?.origin_addresses?.[0]?.split(",")?.[1];
+  console.log("dassadsadsadas", youAreIn);
+
   return (
     <div className="w-full h-full  flex items-center  justify-center bg-background dark:bg-background-dark  pt-16">
       <div className="max-w-screen-2xl w-full relative">
@@ -122,15 +147,18 @@ export default function Hero() {
                 <div className="font-DMSans font-bold text-4xl tracking-tighter text-heading-dark dark:text-heading-dark">
                   {weatherr}°C
                 </div>
-                {insideBounds ? (
-                  <p className="font-DMSans font-bold lg:text-2xl sm:text-xl text-lg tracking-tighter text-heading-dark dark:text-heading-dark">
-                    Welcome! To Purulia.
-                  </p>
-                ) : (
-                  <p className="font-DMSans font-bold lg:text-2xl sm:text-xl text-lg tracking-tighter text-heading-dark dark:text-heading-dark">
-                    Distance from Purulia: {distance} km
-                  </p>
-                )}
+                <p className="font-DMSans font-bold lg:text-2xl sm:text-xl text-lg tracking-tighter text-heading-dark dark:text-heading-dark">
+                  Welcome! To Purulia.
+                </p>
+
+                <p className="font-DMSans font-bold lg:text-2xl sm:text-xl text-lg tracking-tighter text-heading-dark dark:text-heading-dark">
+                  {isInsidePurulia
+                    ? `You are in ${youAreIn}`
+                    : `Distance from Purulia: ${
+                        locationData?.rows?.[0]?.elements?.[0]?.distance?.text ||
+                        "Fetching..."
+                      }`}
+                </p>
               </div>
               <SectionHeading
                 className="text-heading-dark dark:text-heading-dark"
