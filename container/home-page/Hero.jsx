@@ -9,8 +9,8 @@ import {SectionHeading} from "@/components/ui/text-components/SectionHeading";
 import {SubHeading} from "@/components/ui/text-components/SubHeading";
 import axios from "axios";
 import {useEffect, useState} from "react";
-import {Cloud, CloudRain, Sun} from "lucide-react";
 import {useJsApiLoader} from "@react-google-maps/api";
+import Image from "next/image";
 
 export default function Hero() {
   const [location, setLocation] = useState({lat: null, lon: null});
@@ -128,37 +128,51 @@ export default function Hero() {
   const km = 40000;
   const isInsidePurulia = locationData?.rows?.[0]?.elements?.[0]?.distance?.value < km;
   const youAreIn = locationData?.origin_addresses?.[0]?.split(",")?.[1];
-  console.log("dassadsadsadas", youAreIn);
+  console.log("weather", weather);
 
   return (
-    <div className="w-full h-full  flex items-center  justify-center bg-background dark:bg-background-dark  pt-16">
+    <div className="w-full h-full  flex items-center  justify-center bg-background dark:bg-background-dark  ">
       <div className="max-w-screen-2xl w-full relative">
         <ImageSlider />
         <div
-          className={`absolute w-full h-full bg-black/25 flex justify-center  items-center top-0 pt-10 ${styles.xPadding} `}>
+          className={`absolute w-full h-full bg-black/25 flex justify-center  items-center top-0 ${styles.xPadding} `}>
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-10 ">
             <div className=" w-full h-full flex-col  justify-center flex  gap-5 ">
-              <div>
+              <div className="w-full bg-red-500 items-center justify-between flex gap-5  ">
                 <div>
-                  <div className="font-DMSans font-bold lg:text-xl sm:text-xl text-lg tracking-tighter text-heading-dark dark:text-heading-dark">
-                    {weather?.name}
+                  <p className="font-DMSans font-bold lg:text-2xl sm:text-xl text-lg tracking-tighter text-heading-dark dark:text-heading-dark">
+                    Welcome! To Purulia.
+                  </p>
+
+                  <p className="font-DMSans font-bold lg:text-base sm:text-xl text-lg tracking-tighter text-heading-dark dark:text-heading-dark">
+                    {isInsidePurulia
+                      ? `You are in ${youAreIn}`
+                      : `Distance from Purulia : ${
+                          locationData?.rows?.[0]?.elements?.[0]?.distance?.text ||
+                          "Fetching..."
+                        }`}
+                  </p>
+                </div>
+                <div className="flex items-center  gap-2">
+                  <div>
+                    <div className="font-DMSans font-bold lg:text-xl sm:text-xl text-lg tracking-tighter text-heading-dark dark:text-heading-dark">
+                      {weather?.name}
+                    </div>
+                    <div className="font-DMSans font-bold flex items-center gap-2  lg:text-xl sm:text-xl text-lg tracking-tighter text-heading-dark dark:text-heading-dark">
+                      {weather?.weather[0].main}
+                      <Image
+                        width={50}
+                        height={50}
+                        src={`https://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`}
+                        alt={weather?.weather[0].main}
+                        className="w-10 h-10"
+                      />
+                    </div>
+                  </div>
+                  <div className="font-DMSans font-bold text-4xl tracking-tighter text-heading-dark dark:text-heading-dark">
+                    {weatherr}°C
                   </div>
                 </div>
-                <div className="font-DMSans font-bold text-4xl tracking-tighter text-heading-dark dark:text-heading-dark">
-                  {weatherr}°C
-                </div>
-                <p className="font-DMSans font-bold lg:text-2xl sm:text-xl text-lg tracking-tighter text-heading-dark dark:text-heading-dark">
-                  Welcome! To Purulia.
-                </p>
-
-                <p className="font-DMSans font-bold lg:text-2xl sm:text-xl text-lg tracking-tighter text-heading-dark dark:text-heading-dark">
-                  {isInsidePurulia
-                    ? `You are in ${youAreIn}`
-                    : `Distance from Purulia: ${
-                        locationData?.rows?.[0]?.elements?.[0]?.distance?.text ||
-                        "Fetching..."
-                      }`}
-                </p>
               </div>
               <SectionHeading
                 className="text-heading-dark dark:text-heading-dark"
@@ -170,7 +184,7 @@ export default function Hero() {
                 type="large">
                 {`  Discover Purulia's natural beauty and culture!`}
               </Heading>
-              <SubHeading type="extraLarge">
+              <SubHeading type="large">
                 Planning for a trip? We will organize your trip with the best places and
                 within best budget!
               </SubHeading>
