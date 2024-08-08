@@ -175,14 +175,15 @@ export default function Hero() {
                         <MapPin />
                         {weather?.name}
                       </div>
-                      <div className="font-DMSans font-bold lg:text-xl sm:text-xl flex items-center  text-lg  text-heading-dark dark:text-heading-dark">
-                        {capitalizedDescription}
+
+                      <div className="font-DMSans  font-bold text-4xl tracking-tighter text-heading-dark dark:text-heading-dark">
+                        {weatherr}°C
                       </div>
                     </div>
                   </div>
                   <div className="w-full    flex justify-between items-center">
-                    <div className="font-DMSans font-bold text-4xl tracking-tighter text-heading-dark dark:text-heading-dark">
-                      {weatherr}°C
+                    <div className="font-DMSans font-bold lg:text-xl sm:text-xl flex items-center  text-lg  text-heading-dark dark:text-heading-dark">
+                      {capitalizedDescription}
                     </div>
                     <Image
                       width={200}
@@ -192,18 +193,23 @@ export default function Hero() {
                       className="w-20 h-20 "
                     />
                   </div>
-                  <div className="w-full flex flex-col lg:flex-row  lg:items-center justify-between py-2">
+                  <div className="w-full flex flex-col lg:flex-row lg:items-center justify-between pb-4">
                     <p className="font-DMSans font-bold lg:text-2xl sm:text-xl text-lg tracking-tighter text-heading-dark dark:text-heading-dark">
                       Welcome! To Purulia.
                     </p>
 
-                    <p className="font-DMSans font-bold lg:text-lg sm:text-xl text-lg  text-heading-dark dark:text-heading-dark">
-                      {isInsidePurulia
-                        ? `You are in ${youAreIn}`
-                        : `Distance from Purulia : ${
-                            locationData?.rows?.[0]?.elements?.[0]?.distance?.text ||
-                            "Fetching..."
-                          }`}
+                    <p className="font-DMSans font-bold lg:text-lg sm:text-xl text-lg text-heading-dark dark:text-heading-dark">
+                      {isInsidePurulia ? (
+                        `You are in ${youAreIn}`
+                      ) : (
+                        <>
+                          Distance from Purulia :{" "}
+                          <span className="text-2xl font-bold font-DMSans">
+                            {locationData?.rows?.[0]?.elements?.[0]?.distance?.text ||
+                              "Fetching..."}
+                          </span>
+                        </>
+                      )}
                     </p>
                   </div>
                 </div>
