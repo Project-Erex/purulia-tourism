@@ -24,6 +24,10 @@ const nextConfig = {
         source: "/api/distance",
         destination: "https://maps.googleapis.com/maps/api/distancematrix/json", // Proxy to Google Maps API
       },
+      {
+        source: "/api/nearestLocation",
+        destination: "https://maps.googleapis.com/maps/api/directions/json", // Proxy to Google Maps API
+      },
     ];
   },
 };

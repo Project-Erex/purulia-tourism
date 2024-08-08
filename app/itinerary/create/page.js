@@ -41,7 +41,8 @@ export default function Create({}) {
   const fetchedData = data;
 
   const selectedSourceCoords = [23.342257, 86.362839];
-  // const selectedSourceCoords = [23.09363782099861, 86.21183582601076];
+  // const selectedSourceCoords = [23.093398, 86.2117674]; //balarampur
+  // const selectedSourceCoords = [23.4954576, 86.6691834]; // adra
 
   useEffect(() => {
     const fetchDestinations = async () => {
@@ -122,32 +123,7 @@ export default function Create({}) {
     return nearbyWithDistances.map((item) => item);
   }
 
-  function distributeLocationsByDays(locations, maxMinutesPerDay = 480) {
-    const days = [];
-    let currentDay = [];
-    let currentTime = 0;
-
-    locations.forEach((location) => {
-      const spendTime = location.expected_spend_time || 0;
-
-      if (currentTime + spendTime > maxMinutesPerDay) {
-        days.push(currentDay);
-        currentDay = [];
-        currentTime = 0;
-      }
-
-      currentDay.push(location);
-      currentTime += spendTime;
-    });
-
-    if (currentDay.length > 0) {
-      days.push(currentDay);
-    }
-
-    return days;
-  }
-
-  function filterAndSortLocations(locations) {
+  function filterAndSortLocationsByPriority(locations) {
     // Filter out locations based on priority
     // Sort the filtered locations by priority in ascending order
     const sortedLocations = locations.sort(
@@ -157,27 +133,98 @@ export default function Create({}) {
     return sortedLocations;
   }
 
+  const filterByTime = (arr) => {
+    const MAX_TIME = 480;
+    const included = [];
+    const excluded = [];
+
+    arr.forEach((subArr) => {
+      let totalTime = 0;
+      const includedSubArr = [];
+      const excludedSubArr = [];
+
+      subArr.forEach((item) => {
+        if (totalTime + item.expected_spend_time <= MAX_TIME) {
+          totalTime += item.expected_spend_time;
+          includedSubArr.push(item);
+        } else {
+          excludedSubArr.push(item);
+        }
+      });
+
+      included.push(includedSubArr);
+      if (excludedSubArr.length > 0) {
+        excluded.push(excludedSubArr);
+      }
+    });
+
+    return {included, excluded};
+  };
+
+  async function getSortedLocationsByNearest(locations, destination) {
+    const apiKey = "AIzaSyDbxdM_pA81YqlheJSleL2wG2-5-64j9NQ";
+    const origins = `${selectedSourceCoords[0]},${selectedSourceCoords[1]}`;
+    const dest = `${destination.latitude},${destination.longitude}`;
+    const waypoints = locations
+      .map((loc) => `${loc.latitude},${loc.longitude}`)
+      .join("|");
+
+    const url = `/api/nearestLocation?units=metric&origin=${origins}&destination=${dest}&waypoints=${waypoints}&mode=driving&key=${apiKey}`;
+    console.log(url);
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      // console.log("sad", data);
+
+      if (data.status !== "OK") {
+        console.error("Error with Distance Matrix API:", data);
+        return;
+      }
+
+      const distances = data.routes[0].legs;
+      // console.log("sad", distances[2].distance.value);
+
+      // Attach distance data to each location
+      const newLocation = locations.map((location, index) => ({
+        ...location,
+        accDistanceValue: distances[index].distance.value, // Distance in meters
+      }));
+      // console.log("dsadasd", x);
+
+      // Sort locations by distanceValue
+      newLocation.sort((a, b) => a.accDistanceValue - b.accDistanceValue);
+
+      // console.log("Sorted locations by nearest driving distance:", locations);
+      return newLocation;
+    } catch (error) {
+      console.error("Failed to fetch data from Distance Matrix API:", error);
+    }
+  }
+
   //sort filter locaiton by close distance
-  const distanceFromSource = 40;
+  const distanceFromSource = 120;
   const nearbySourceLocation = filterAndSortNearby(
     selectedSourceCoords,
     sourceLocation,
     distanceFromSource,
   );
+  // console.log("Data", nearbySourceLocation);
+
   const locationOrderMap = new Map(
     nearbySourceLocation.map((item, index) => [item?.location_name, index]),
   );
 
-  const maxDistance = 60; // kilometers
+  const getLocationOrderIndex = (name) =>
+    locationOrderMap.get(name) !== undefined ? locationOrderMap.get(name) : Infinity;
+
+  const maxDistance = 120; // kilometers
   const nearbyLocation = filterAndSortNearby(
     selectedSourceCoords,
     fetchedData,
     maxDistance,
   );
-  const destinationByPriority = filterAndSortLocations(nearbyLocation);
-
-  const getLocationOrderIndex = (name) =>
-    locationOrderMap.get(name) !== undefined ? locationOrderMap.get(name) : Infinity;
+  const destinationByPriority = filterAndSortLocationsByPriority(nearbyLocation);
 
   // Sort the destinations by the specified order
   const sortedDestinations = destinationByPriority.sort((a, b) => {
@@ -186,13 +233,24 @@ export default function Create({}) {
     return aIndex - bIndex;
   });
 
-  // const distributedLocations = distributeLocationsByDays(sortedDestinations);
+  const groupedByDays = nearbySourceLocation
+    .map((item) => item?.location_name)
+    .map((routeName) => {
+      return sortedDestinations?.filter((item) => item.routes.name === routeName);
+    });
 
-  // console.log(organizedData);
+  const {included, excluded} = filterByTime(groupedByDays);
 
-  //   const destinationByRoutes = destinationByPriority?.map();
+  const dayWiseNearestData =
+    included.length > 0 &&
+    getSortedLocationsByNearest(included[0], included[0][included[0].length - 1]).then(
+      (res) => {
+        console.log("Data: dasd", res);
+      },
+    );
 
-  console.log("hello", sortedDestinations);
+  // console.log("inclide", included);
+  // console.log("exclude", excluded);
 
   return (
     <div className="pt-24 w-full">
