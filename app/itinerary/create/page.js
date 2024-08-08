@@ -21,6 +21,10 @@ export default function Create({}) {
   const perDayTravelTime = parseInt(params.get("numberOfDays")) * 60;
   const selectedLocation = "purulia";
 
+  const [sourceLocation, setSourceLocation] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(true);
+
   const orderr =
     startLocation === "adra"
       ? "dist_from_adra"
@@ -36,7 +40,8 @@ export default function Create({}) {
 
   const fetchedData = data;
 
-  const puruliaCoords = [23.342257, 86.362839];
+  const selectedSourceCoords = [23.342257, 86.362839];
+  // const selectedSourceCoords = [23.09363782099861, 86.21183582601076];
 
   useEffect(() => {
     const fetchDestinations = async () => {
@@ -58,6 +63,25 @@ export default function Create({}) {
         setLoading(false);
       }
     };
+
+    const fetchStartingPoint = async () => {
+      try {
+        const {data: locations, error} = await supabase
+          .from("starting_locations")
+          .select("*");
+
+        if (error) {
+          throw error;
+        }
+        setSourceLocation(locations || []);
+        setIsLoading(false);
+        console.log("Final Locations", locations);
+      } catch (error) {
+        console.error("Error fetching images:", error.message);
+      }
+    };
+
+    fetchStartingPoint();
 
     fetchDestinations();
   }, [startLocation]);
@@ -98,8 +122,6 @@ export default function Create({}) {
     return nearbyWithDistances.map((item) => item);
   }
 
-  const maxDistance = 60; // kilometers
-
   function distributeLocationsByDays(locations, maxMinutesPerDay = 480) {
     const days = [];
     let currentDay = [];
@@ -127,25 +149,50 @@ export default function Create({}) {
 
   function filterAndSortLocations(locations) {
     // Filter out locations based on priority
-    const filteredLocations = locations.filter(
-      (location) => location?.priority?.value >= 0 && location?.priority?.value <= 5,
-    );
-
     // Sort the filtered locations by priority in ascending order
-    const sortedLocations = filteredLocations.sort(
-      (a, b) => b?.priority?.value - a?.priority?.value,
+    const sortedLocations = locations.sort(
+      (a, b) => a?.priority?.value - b?.priority?.value,
     );
 
     return sortedLocations;
   }
 
-  const nearbyLocation = filterAndSortNearby(puruliaCoords, fetchedData, maxDistance);
-  //   const distributedLocations = distributeLocationsByDays(nearbyLocation);
+  //sort filter locaiton by close distance
+  const distanceFromSource = 40;
+  const nearbySourceLocation = filterAndSortNearby(
+    selectedSourceCoords,
+    sourceLocation,
+    distanceFromSource,
+  );
+  const locationOrderMap = new Map(
+    nearbySourceLocation.map((item, index) => [item?.location_name, index]),
+  );
+
+  const maxDistance = 60; // kilometers
+  const nearbyLocation = filterAndSortNearby(
+    selectedSourceCoords,
+    fetchedData,
+    maxDistance,
+  );
   const destinationByPriority = filterAndSortLocations(nearbyLocation);
+
+  const getLocationOrderIndex = (name) =>
+    locationOrderMap.get(name) !== undefined ? locationOrderMap.get(name) : Infinity;
+
+  // Sort the destinations by the specified order
+  const sortedDestinations = destinationByPriority.sort((a, b) => {
+    const aIndex = getLocationOrderIndex(a.routes.name);
+    const bIndex = getLocationOrderIndex(b.routes.name);
+    return aIndex - bIndex;
+  });
+
+  // const distributedLocations = distributeLocationsByDays(sortedDestinations);
+
+  // console.log(organizedData);
 
   //   const destinationByRoutes = destinationByPriority?.map();
 
-  console.log("hello", destinationByPriority);
+  console.log("hello", sortedDestinations);
 
   return (
     <div className="pt-24 w-full">
