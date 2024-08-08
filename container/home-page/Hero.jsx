@@ -11,6 +11,7 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import {useJsApiLoader} from "@react-google-maps/api";
 import Image from "next/image";
+import {MapPin} from "lucide-react";
 
 export default function Hero() {
   const [location, setLocation] = useState({lat: null, lon: null});
@@ -130,50 +131,23 @@ export default function Hero() {
   const youAreIn = locationData?.origin_addresses?.[0]?.split(",")?.[1];
   console.log("weather", weather);
 
+  const capitalizeFirstWord = (text) => {
+    if (!text) return text;
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  };
+
+  const capitalizedDescription = capitalizeFirstWord(
+    `${weather?.weather[0].description}`,
+  );
+
   return (
-    <div className="w-full h-full  flex items-center  justify-center bg-background dark:bg-background-dark  ">
+    <div className="w-full h-full  flex items-center  justify-center bg-background dark:bg-background-dark pt-20 lg:pt-0 ">
       <div className="max-w-screen-2xl w-full relative">
         <ImageSlider />
         <div
           className={`absolute w-full h-full bg-black/25 flex justify-center  items-center top-0 ${styles.xPadding} `}>
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-10 ">
             <div className=" w-full h-full flex-col  justify-center flex  gap-5 ">
-              <div className="w-full bg-red-500 items-center justify-between flex gap-5  ">
-                <div>
-                  <p className="font-DMSans font-bold lg:text-2xl sm:text-xl text-lg tracking-tighter text-heading-dark dark:text-heading-dark">
-                    Welcome! To Purulia.
-                  </p>
-
-                  <p className="font-DMSans font-bold lg:text-base sm:text-xl text-lg tracking-tighter text-heading-dark dark:text-heading-dark">
-                    {isInsidePurulia
-                      ? `You are in ${youAreIn}`
-                      : `Distance from Purulia : ${
-                          locationData?.rows?.[0]?.elements?.[0]?.distance?.text ||
-                          "Fetching..."
-                        }`}
-                  </p>
-                </div>
-                <div className="flex items-center  gap-2">
-                  <div>
-                    <div className="font-DMSans font-bold lg:text-xl sm:text-xl text-lg tracking-tighter text-heading-dark dark:text-heading-dark">
-                      {weather?.name}
-                    </div>
-                    <div className="font-DMSans font-bold flex items-center gap-2  lg:text-xl sm:text-xl text-lg tracking-tighter text-heading-dark dark:text-heading-dark">
-                      {weather?.weather[0].main}
-                      <Image
-                        width={50}
-                        height={50}
-                        src={`https://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`}
-                        alt={weather?.weather[0].main}
-                        className="w-10 h-10"
-                      />
-                    </div>
-                  </div>
-                  <div className="font-DMSans font-bold text-4xl tracking-tighter text-heading-dark dark:text-heading-dark">
-                    {weatherr}°C
-                  </div>
-                </div>
-              </div>
               <SectionHeading
                 className="text-heading-dark dark:text-heading-dark"
                 type="large">
@@ -191,7 +165,50 @@ export default function Hero() {
               <Button type="link" href="/comingsoon" title="View Packages" />
             </div>
             <div className="w-full h-full flex justify-center items-center">
-              <Category />
+              <div className=" w-full px-5 pb-5 bg-blue-900 bg-opacity-50 backdrop-blur-xl border border-blue-900 border-opacity-25 p-8 rounded-lg ">
+                <div className="flex flex-col items-center w-full gap-2">
+                  <div className="w-full ">
+                    <div
+                      className="flex w-full justify-between
+                      items-center">
+                      <div className="font-DMSans font-bold lg:text-xl sm:text-xl  flex items-center gap-1 text-lg  text-heading-dark dark:text-heading-dark">
+                        <MapPin />
+                        {weather?.name}
+                      </div>
+                      <div className="font-DMSans font-bold lg:text-xl sm:text-xl flex items-center  text-lg  text-heading-dark dark:text-heading-dark">
+                        {capitalizedDescription}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="w-full    flex justify-between items-center">
+                    <div className="font-DMSans font-bold text-4xl tracking-tighter text-heading-dark dark:text-heading-dark">
+                      {weatherr}°C
+                    </div>
+                    <Image
+                      width={200}
+                      height={200}
+                      src={`https://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`}
+                      alt={weather?.weather[0].main}
+                      className="w-20 h-20 "
+                    />
+                  </div>
+                  <div className="w-full flex flex-col lg:flex-row  lg:items-center justify-between py-2">
+                    <p className="font-DMSans font-bold lg:text-2xl sm:text-xl text-lg tracking-tighter text-heading-dark dark:text-heading-dark">
+                      Welcome! To Purulia.
+                    </p>
+
+                    <p className="font-DMSans font-bold lg:text-lg sm:text-xl text-lg  text-heading-dark dark:text-heading-dark">
+                      {isInsidePurulia
+                        ? `You are in ${youAreIn}`
+                        : `Distance from Purulia : ${
+                            locationData?.rows?.[0]?.elements?.[0]?.distance?.text ||
+                            "Fetching..."
+                          }`}
+                    </p>
+                  </div>
+                </div>
+                <Category />
+              </div>
             </div>
           </div>
         </div>

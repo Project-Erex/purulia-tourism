@@ -23,6 +23,7 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
+        customBlue: "rgba(41,76,136,0.5)",
         primary: "rgb(59 130 246)",
         border: "#CCCCCC",
         skeleton: "#E5E7EB",
@@ -50,6 +51,9 @@ module.exports = {
         lg: "1024px",
         xl: "1280px",
         "2xl": "1536px",
+      },
+      backdropBlur: {
+        16: "16px",
       },
       boxShadow: {
         "3xl":
