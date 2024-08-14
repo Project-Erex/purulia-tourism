@@ -8,3 +8,23 @@
   scroll-behavior: smooth;
   color-scheme: white;
 }
+
+.animation_layer {
+  background-position: bottom center;
+  background-size: auto 1038px;
+  background-repeat: repeat-x;
+  width: 100%;
+  position: absolute;
+}
+
+.animation_layer.parallax {
+  position: fixed;
+}
+
+#backgroundImage {
+  background-image: url(../public/images/home-page/backgroundImage.png);
+}
+
+#hill {
+  background-image: url(../public/images/home-page/hill.png);
+}

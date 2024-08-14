@@ -1,10 +1,9 @@
-import {DM_Sans, Dancing_Script} from "next/font/google";
+import {DM_Sans, Dancing_Script, Open_Sans} from "next/font/google";
 import "./globals.css";
 
 import {Providers} from "./providers";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
-import Script from "next/script";
 
 const DancingScript = Dancing_Script({
   weight: ["400", "500", "600", "700"],
@@ -17,6 +16,13 @@ const DMSans = DM_Sans({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-DMSans",
+});
+
+const OpenSans = Open_Sans({
+  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-OpenSans",
 });
 
 export const metadata = {
@@ -92,7 +98,7 @@ export default function RootLayout({children}) {
   return (
     <html lang="en">
       <body
-        className={`${DancingScript.variable} ${DMSans.variable}`}
+        className={`${DancingScript.variable} ${DMSans.variable} ${OpenSans.variable}`}
         suppressHydrationWarning>
         <Providers>
           <Header />

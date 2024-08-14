@@ -38,7 +38,7 @@ const cards = [
 ];
 export default function PhotoGallery() {
   return (
-    <Section type="paddingXB">
+    <Section type="paddingXY">
       <div className="flex gap-4 relative w-full h-full  flex-col items-center">
         <SectionHeading type="large">Media gallary</SectionHeading>
         <div className="max-w-3xl text-center">

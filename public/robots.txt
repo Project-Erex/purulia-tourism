@@ -4,6 +4,3 @@ Allow: /
 
 # Host
 Host: https://puruliatour.com/
-
-# Sitemaps
-Sitemap: https://puruliatour.com/sitemap.xml
