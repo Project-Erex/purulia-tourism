@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 export const Heading = ({children, className, type}) => {
   const typeClasses = clsx(
-    "font-DMSans leading-normal text-heading dark:text-heading-dark",
+    "font-OpenSans leading-normal text-heading dark:text-heading-dark",
     type === "large" &&
       "text-[30px] md:text-[42px] leading-[45px] lg:text-[45px] md:leading-[54px] lg:leading-[60px] font-bold",
     type === "xlarge" && "text-[44px] md:text-[56px] font-medium",

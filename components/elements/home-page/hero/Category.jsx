@@ -6,21 +6,21 @@ import React from "react";
 
 export default function Category() {
   return (
-    <div className="grid  grid-cols-2 lg:grid-cols-3 w-full gap-1 bg-background dark:bg-background-dark  rounded-[10px] p-1 h-fit">
+    <div className="grid  grid-cols-2 lg:grid-cols-3 w-full gap-2 rounded-[10px]  h-fit">
       {CategoryData.map((item, index) => {
         return (
           <Link
             href={item.id}
             key={index}
-            className="flex items-center border rounded-xl p-2 lg:p-6 justify-center flex-col">
+            className="flex items-center border rounded-md py-2  justify-center flex-col">
             <Image
               src={item.icon}
               alt={item.title}
               width={0}
               height={0}
-              className="w-24 h-24"
+              className="w-16 h-16"
             />
-            <Heading className="text-lg font-DMSans font-normal text-primary dark:text-heading-dark">
+            <Heading className="text-lg font-DMSans font-normal text-heading-dark">
               {item.title}
             </Heading>
           </Link>

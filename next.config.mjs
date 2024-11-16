@@ -13,7 +13,7 @@ const nextConfig = {
         pathname: "**",
       },
     ],
-    domains: ["res.cloudinary.com"],
+    domains: ["res.cloudinary.com", "openweathermap.org"],
   },
   experimental: {
     missingSuspenseWithCSRBailout: false,

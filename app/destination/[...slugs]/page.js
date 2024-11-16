@@ -203,7 +203,7 @@ const ImageCounter = ({extraImagesCount, isData, dataa}) => {
 
 const Details = ({isData, className}) => {
   return (
-    <div class={`${className} `}>
+    <div className={`${className} `}>
       <div className="flex items-center justify-start">
         <p className="mb-2font-medium pr-5 font-DMSans text-2xl font-semibold">
           {isData[0].name}

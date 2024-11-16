@@ -23,22 +23,29 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        primary: "rgb(59 130 246)",
-        border: "#CCCCCC",
+        customBlue: "rgba(41,76,136,0.5)",
+        "white-03": "rgba(225, 225, 225, 0.18)",
+        primary: "#2563EB",
+        border: "#DBEAFE",
         skeleton: "#E5E7EB",
         heading: {
-          DEFAULT: "#161c2d",
-          light: "#161c2d",
+          DEFAULT: "#000000",
+          light: "#000000",
           dark: "#ffffff",
         },
         subheading: {
-          DEFAULT: "#475877",
-          light: "#475877",
-          dark: "#94a3b8",
+          DEFAULT: "#1F2937",
+          light: "#1F2937",
+          dark: "#ffffff",
         },
         background: {
           DEFAULT: "#ffffff",
           light: "#ffffff",
+          dark: "#0f172a",
+        },
+        backgroundlite: {
+          DEFAULT: "#EFF6FF",
+          light: "#EFF6FF",
           dark: "#0f172a",
         },
       },
@@ -51,6 +58,13 @@ module.exports = {
         xl: "1280px",
         "2xl": "1536px",
       },
+      backdropBlur: {
+        16: "16px",
+        custom: "8px",
+      },
+      borderColor: {
+        "white-015": "rgba(225, 225, 225, 0.18)",
+      },
       boxShadow: {
         "3xl":
           "rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset",
@@ -58,6 +72,7 @@ module.exports = {
       fontFamily: {
         DancingScript: ["var(--font-DancingScript)"],
         DMSans: ["var(--font-DMSans)"],
+        OpenSans: ["var(--font-OpenSans)"],
       },
       keyframes: {
         "accordion-down": {

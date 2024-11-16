@@ -7,15 +7,22 @@ import {
   Ticket,
 } from "@/public/icon/home-page";
 import {Marvellake, Purulia, Vagabandh} from "@/public/images/home-page/Index";
-import {Airplane, Bus, Train} from "@/public/svg";
+import {Airplane, Bus, Train} from "@/public/svg/home-page/How-to-reach/index";
+import {
+  Tickets,
+  Hotel,
+  Package,
+  Vehicle,
+  TravelItinerary,
+} from "@/public/svg/home-page/Trip/Index";
 
 export const ImageCarousel = [
-  {image: Purulia, title: "Purulia"},
-  {image: Marvellake, title: "Marvellake"},
-  {image: Vagabandh, title: "Vagabandh"},
-  {image: Purulia, title: "Purulia"},
-  {image: Marvellake, title: "Marvellake"},
-  {image: Vagabandh, title: "Vagabandh"},
+  {image: Purulia, title: "Purulia", hotels: 10},
+  {image: Marvellake, title: "Marvellake", hotels: 14},
+  {image: Vagabandh, title: "Vagabandh", hotels: 6},
+  {image: Purulia, title: "Purulia", hotels: 12},
+  {image: Marvellake, title: "Marvellake", hotels: 8},
+  {image: Vagabandh, title: "Vagabandh", hotels: 16},
 ];
 
 export const CategoryData = [
@@ -31,4 +38,12 @@ export const HowToReachData = [
   {icon: Airplane, title: "Flight", subtitle: "CCU [320KM]"},
   {icon: Train, title: "Train", subtitle: "PRR [32KM]"},
   {icon: Bus, title: "Bus", subtitle: "PRR BS [35KM]"},
+];
+
+export const TripCardData = [
+  {icon: TravelItinerary, title: "Travel Itinerary"},
+  {icon: Vehicle, title: "Vehicle"},
+  {icon: Package, title: "Package"},
+  {icon: Hotel, title: "Hotel"},
+  // {icon: Tickets, title: "Ticket"},
 ];

@@ -4,7 +4,7 @@ import {styles} from "@/app/styles";
 
 export default function Section({children, id, className, type, Padding}) {
   const sectionClasses = clsx(
-    "w-full  h-full flex items-center justify-center bg-background-light dark:bg-background-dark overflow-hidden",
+    " w-full  h-full flex items-center justify-center bg-background  overflow-hidden",
     type === "paddingX" && styles.xPadding,
     type === "paddingY" && styles.yPadding,
     type === "paddingXT" && [styles.xPadding, styles.tPadding],
@@ -16,7 +16,7 @@ export default function Section({children, id, className, type, Padding}) {
   return (
     <section id={id} className={sectionClasses}>
       <div
-        className={`flex flex-col items-center justify-center w-full  max-w-screen-xl`}>
+        className={`flex flex-col items-center  justify-center w-full  max-w-screen-xl`}>
         {children}
       </div>
     </section>

@@ -22,7 +22,7 @@ export default function Itinerary() {
   const isButtonDisabled = selectedDistance === null && numberOfDays === null;
   const linkPath = `/itinerary/create?exactDays=${numberOfDays}&numberOfDays=${
     numberOfDays === 1 ? 8 : numberOfDays === 2 ? 16 : numberOfDays === 3 ? 24 : null
-  }&selectedDistance=${selectedDistance}`;
+  }&selectedDistance=${selectedDistance}&latlong=123`;
 
   return (
     <div className="overflow-hidden  pt-40">
