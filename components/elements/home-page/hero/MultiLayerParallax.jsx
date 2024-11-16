@@ -203,6 +203,7 @@ export default function MultiLayerParallax() {
               />
               {weatherr}°C
             </div>
+            <SubHeading type="small">{weather?.weather[0].description}</SubHeading>
           </div>
         </div>
         {/* /// */}
