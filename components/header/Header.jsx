@@ -87,7 +87,7 @@ export default function Header() {
         <AnimatePresence>
           {mobMenu && (
             <>
-              <motion.div className="z-50 flex justify-end w-full h-svh bg-white/25 dark:bg-black/25 ">
+              <motion.div className="z-50 flex justify-end w-full h-svh">
                 <motion.div
                   initial={{opacity: 0, x: 100}}
                   animate={{

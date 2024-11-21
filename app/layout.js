@@ -1,7 +1,6 @@
 import {DM_Sans, Dancing_Script, Open_Sans} from "next/font/google";
 import "./globals.css";
 
-import {Providers} from "./providers";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 
@@ -100,11 +99,9 @@ export default function RootLayout({children}) {
       <body
         className={`${DancingScript.variable} ${DMSans.variable} ${OpenSans.variable}`}
         suppressHydrationWarning>
-        <Providers>
-          <Header />
-          {children}
-          <Footer />
-        </Providers>
+        <Header />
+        {children}
+        <Footer />
       </body>
     </html>
   );

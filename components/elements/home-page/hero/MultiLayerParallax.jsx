@@ -161,15 +161,16 @@ export default function MultiLayerParallax() {
       <div className="z-50 absolute top-24 w-full ">
         {/*  */}
         <div
-          className={` flex justify-between flex-col md:flex-row items-center w-full gap-2 ${styles.xPadding}`}>
+          className={` flex justify-between  md:flex-row items-center w-full gap-2 ${styles.xPadding}`}>
           {/* ************* */}
+
           <div className=" bg-white-03 backdrop-blur-custom border border-white-015  w-56 h-24 flex flex-col items-center justify-center rounded-lg">
             {isInsidePurulia ? (
               `You are in ${youAreIn}`
             ) : (
-              <div className="font-OpenSans font-normal lg:text-base flex-col gap-1  flex items-center sm:text-xl text-lg text-subheading dark:text-heading-dark">
+              <div className="font-OpenSans  font-normal  text-sm md:text-base flex-col gap-1  flex items-center  text-subheading dark:text-heading-dark">
                 Distance from Purulia
-                <span className="text-2xl font-semibold flex gap-2 items-center text-primary  uppercase">
+                <span className=" text-xl  md:text-2xl font-semibold flex gap-2 items-center text-primary  uppercase">
                   <FaRoute size={20} />{" "}
                   {locationData?.rows?.[0]?.elements?.[0]?.distance?.text || (
                     <ThreeDots
@@ -180,7 +181,6 @@ export default function MultiLayerParallax() {
                       radius="8"
                       ariaLabel="three-dots-loading"
                       wrapperStyle={{}}
-                      wrapperClass=""
                     />
                   )}
                 </span>
@@ -189,31 +189,35 @@ export default function MultiLayerParallax() {
           </div>
 
           <div className=" bg-white-03 backdrop-blur-custom border border-white-015   w-56 h-24 flex flex-col items-center justify-center rounded-lg">
-            <p className="font-OpenSans font-normal lg:text-base  gap-1  flex items-center sm:text-xl text-lg text-subheading dark:text-heading-dark">
-              {/* <MapPin size={20} /> */}
-              {weather?.name}
+            <p className="font-OpenSans font-normal  justify-center  w-full  flex items-center text-sm md:text-base text-subheading dark:text-heading-dark">
+              <span className=" flex">
+                <MapPin size={20} />
+                {weather?.name}
+              </span>
+              {/* <SubHeading type="small">{weather?.weather[0].description}</SubHeading> */}
             </p>
-            <div className="font-OpenSans  text-2xl font-semibold flex gap-1 items-center text-primary  uppercase">
+            <div className="font-OpenSans text-xl  md:text-2xl font-semibold flex gap-1 items-center text-primary  uppercase">
               <Image
                 width={200}
                 height={200}
                 src={`https://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`}
-                alt={weather?.weather[0].main}
+                alt={weather?.weather[0].main || " Weather"}
                 className="w-10 h-10 "
               />
               {weatherr}°C
             </div>
-            <SubHeading type="small">{weather?.weather[0].description}</SubHeading>
           </div>
         </div>
         {/* /// */}
       </div>
-      <motion.h2
-        style={{y: textY}}
-        className="font-bold text-red-500 z-[999] text-center text-6xl font-OpenSans">
-        Discover Purulia’s Nature
-        <br /> Beauty & Culture!
-      </motion.h2>
+      <div className=" w-full h-full justify-center hidden md:flex items-center border-x-primary">
+        <motion.h2
+          style={{y: textY}}
+          className="font-bold text-white z-50  text-center md:text-5xl xl:text-6xl font-OpenSans">
+          Discover Purulia’s Nature
+          <br /> Beauty & Culture!
+        </motion.h2>
+      </div>
 
       <motion.div
         className="absolute inset-0 z-0 "
@@ -223,6 +227,7 @@ export default function MultiLayerParallax() {
           backgroundSize: "cover",
           y: backgroundY,
         }}></motion.div>
+
       <div
         className="absolute inset-0 z-20 "
         style={{
