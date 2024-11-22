@@ -11,7 +11,6 @@ import Section from "../section/Section";
 import {AnimatePresence, motion} from "framer-motion";
 
 import DropDownIcon from "../../public/svg/home-page/Header/DropDown";
-import {Search} from "lucide-react";
 
 export default function Header() {
   const [mobMenu, setMobMenu] = useState(false);
@@ -36,12 +35,9 @@ export default function Header() {
                 </figure>
               </Link>
             </div>
-            <div className="flex items-center gap-5 lg:gap-0  ">
+            <div className="flex items-center  ">
               <Navbar className="hidden lg:flex" />
               {/* <ToggleDarkMode /> */}
-              <button>
-                <Search className="flex w-5 text-gray-700" />
-              </button>
 
               <button
                 onClick={() => {
@@ -91,7 +87,7 @@ export default function Header() {
         <AnimatePresence>
           {mobMenu && (
             <>
-              <motion.div className="z-50 flex justify-end w-full h-svh bg-white/25 dark:bg-black/25 ">
+              <motion.div className="z-50 flex justify-end w-full h-svh">
                 <motion.div
                   initial={{opacity: 0, x: 100}}
                   animate={{

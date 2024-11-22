@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function TripCard() {
   return (
     <div className="w-full h-full rounded-lg border-border border bg-backgroundlite ">
-      <div className="grid grid-cols-2 md:grid-cols-3 shadow-lg lg:grid-cols-4 xl:grid-cols-4  p-5 gap-5  w-full h-full ">
+      <div className="grid grid-cols-1 md:grid-cols-2 shadow-lg lg:grid-cols-4 xl:grid-cols-4  p-5 gap-5  w-full h-full ">
         {TripCardData.map((item, inedx) => (
           <div
             key={inedx}
@@ -21,8 +21,8 @@ export default function TripCard() {
             <p className="line-clamp-1 font-OpenSans font-semibold text-heading text-base md:text-lg">
               {item.title}
             </p>
-            <p className="text-center">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit elit
+            <p className="text-center font-OpenSans font-normal text-sm lg:text-sm ">
+              {item.description}
             </p>
           </div>
         ))}

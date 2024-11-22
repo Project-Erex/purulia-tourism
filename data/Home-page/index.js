@@ -41,9 +41,32 @@ export const HowToReachData = [
 ];
 
 export const TripCardData = [
-  {icon: TravelItinerary, title: "Travel Itinerary"},
-  {icon: Vehicle, title: "Vehicle"},
-  {icon: Package, title: "Package"},
-  {icon: Hotel, title: "Hotel"},
-  // {icon: Tickets, title: "Ticket"},
+  {
+    icon: TravelItinerary,
+    title: "Travel Itinerary",
+    description: (
+      <>
+        Never miss any place and save your time with our <strong>AI generated</strong>{" "}
+        travel plan at Purulia.
+      </>
+    ),
+  },
+  {
+    icon: Vehicle,
+    title: "Vehicle",
+    description:
+      "Book your vehicle to travel hassle free. Just enjoy your holiday with amazing nature.",
+  },
+  {
+    icon: Package,
+    title: "Package",
+    description:
+      "Secure your tour to Purulia with a tour package, Covers Vehicle, Hotels and food.",
+  },
+  {
+    icon: Hotel,
+    title: "Hotel",
+    description:
+      "Choose and pre-book from best Hotels and Resorts for better staying experience.",
+  },
 ];

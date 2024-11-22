@@ -1,8 +1,8 @@
 "use client";
 
-import { ThemeProvider } from "next-themes";
+import {ThemeProvider} from "next-themes";
 
-function Providers({ children }) {
+function Providers({children}) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       {children}
@@ -10,4 +10,4 @@ function Providers({ children }) {
   );
 }
 
-module.exports = { Providers };
+module.exports = {Providers};
