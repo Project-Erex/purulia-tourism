@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/accordion";
 import {Input} from "@/components/ui/input";
 
-export default function page() {
+export default function Page() {
   const [activeIndex, setActiveIndex] = useState(null);
 
   return (
